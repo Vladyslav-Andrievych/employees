@@ -1,0 +1,78 @@
+@use '../../../../common/styles/variables.scss' as variables;
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: variables.$background-dark-with-opacity-color;
+}
+
+.modal {
+  position: relative;
+  width: 373px;
+  height: 192px;
+  background-color: variables.$pure-white-color;
+  border-radius: 20px;
+  margin: auto;
+  padding: 24px 16px 8px;
+
+  &__close-btn {
+    position: absolute;
+    right: 16px;
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 50%;
+    background-color: variables.$background-light;
+    color: variables.$divider-grey;
+    transform: rotate(45deg);
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    color: variables.$dark-text-color;
+    margin: 0;
+  }
+
+  &__radio {
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 16px;
+  }
+
+  &__radio-label {
+    display: flex;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    color: variables.$dark-text-color;
+    cursor: pointer;
+  }
+
+  &__radio-input {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid variables.$main-blue;
+    border-radius: 50%;
+    outline: none;
+    background-color: variables.$pure-white-color;
+    cursor: pointer;
+    margin-right: 14px;
+
+    &:checked {
+      border: 7px solid variables.$main-blue;
+    }
+  }
+}

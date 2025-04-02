@@ -1,0 +1,36 @@
+@use '../../../../common/styles/variables.scss' as variables;
+
+.employee-list {
+  padding: 16px;
+
+  &__item-container {
+    margin-top: 4px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  &__item-link {
+    text-decoration: none;
+  }
+}
+
+.emoloyee-list-item-divider {
+  display: flex;
+  margin: 28px 24px;
+
+  & hr {
+    flex-grow: 1;
+    border: none;
+    border-bottom: 1px solid variables.$divider-grey;
+  }
+
+  & span {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+    color: variables.$divider-grey;
+    margin: 0 72px;
+  }
+}

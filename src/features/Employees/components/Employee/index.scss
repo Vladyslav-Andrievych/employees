@@ -1,0 +1,50 @@
+@use '../../../../common/styles/variables.scss' as variables;
+
+.employee {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &__avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+  }
+
+  &__info {
+    margin-left: 16px;
+  }
+
+  &__name {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    color: variables.$dark-text-color;
+    margin: 0;
+  }
+
+  &__tag {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    color: variables.$light-dark-text-color;
+    margin-left: 4px;
+  }
+
+  &__position {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 16px;
+    color: variables.$slightly-dark-text-color;
+    text-transform: capitalize;
+  }
+
+  &__birthdate {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px;
+    color: variables.$slightly-dark-text-color;
+    margin-left: auto;
+  }
+}

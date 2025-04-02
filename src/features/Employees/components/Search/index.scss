@@ -1,0 +1,57 @@
+@use '../../../../common/styles/variables.scss' as variables;
+
+.search-field {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  background-color: variables.$background-light;
+  border-radius: 16px;
+  padding: 8px 12px;
+  margin-top: 6px;
+
+  &__label {
+    flex-grow: 1;
+    display: flex;
+    flex-flow: row-reverse;
+  }
+
+  &__input {
+    flex-grow: 1;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+    background-color: transparent;
+    color: variables.$dark-text-color;
+    caret-color: variables.$main-blue;
+    border: none;
+    outline: none;
+    padding: 0;
+
+    &::placeholder {
+      color: variables.$divider-grey;
+    }
+
+    &:focus ~ .search-field__icon {
+      color: variables.$dark-text-color;
+    }
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    font-size: 23px;
+    color: variables.$divider-grey;
+    margin-right: 8px;
+    cursor: pointer;
+  }
+
+  &__sort-btn {
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}

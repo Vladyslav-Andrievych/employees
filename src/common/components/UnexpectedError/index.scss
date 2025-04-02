@@ -1,0 +1,51 @@
+@use '../../styles/variables.scss' as variables;
+
+.container {
+  display: flex;
+  flex-grow: 1;
+}
+
+.error {
+  width: 343px;
+  height: 150px;
+  margin: auto;
+
+  &__img {
+    width: 56px;
+    height: 56px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  &__info {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 22px;
+    color: variables.$dark-text-color;
+    text-align: center;
+    margin: 0;
+    margin-top: 8px;
+  }
+
+  &__text {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: variables.$light-dark-text-color;
+    text-align: center;
+    margin: 0;
+    margin-top: 12px;
+  }
+
+  &__reload-page-btn {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    color: variables.$main-blue;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 12px auto 0;
+  }
+}
