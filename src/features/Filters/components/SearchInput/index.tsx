@@ -1,13 +1,13 @@
 import './index.scss';
 
-type SearchProps = {
+type SearchInputProps = {
   sortValue: 'alphabet' | 'birthdate';
   setIsPopupVisible: (visible: boolean) => void;
   searchText: string;
   setSearchText: (newValue: string) => void;
 };
 
-const Search: React.FC<SearchProps> = ({
+const SearchInput: React.FC<SearchInputProps> = ({
   sortValue,
   searchText,
   setSearchText,
@@ -28,11 +28,11 @@ const Search: React.FC<SearchProps> = ({
     </label>
     <button className="search-field__sort-btn" onClick={() => setIsPopupVisible(true)}>
       <img
-        src={sortValue === 'alphabet' ? 'sort-icon.png' : 'sort-icon_active.png'}
+        src={sortValue === 'alphabet' ? '/images/sort-icon.png' : '/images/sort-icon_active.png'}
         alt="Sort button icon"
       />
     </button>
   </div>
 );
 
-export default Search;
+export default SearchInput;

@@ -14,7 +14,7 @@ const Employee: React.FC<EmployeeProps> = ({ employeeData, showBirthdateInfo }) 
   return (
     <div className="employee">
       <img
-        src={avatar || '/employee-standart-avatar.png'}
+        src={avatar || '/images/employee-standart-avatar.png'}
         alt="Employee avatar"
         className="employee__avatar"
       />

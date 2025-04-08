@@ -1,7 +1,5 @@
-import Search from '../Search';
-import Filters from '../Filters';
-
-import './index.scss';
+import SearchInput from './components/SearchInput';
+import PositionTabs from './components/PositionTabs';
 
 type HeaderProps = {
   sortValue: 'alphabet' | 'birthdate';
@@ -12,7 +10,7 @@ type HeaderProps = {
   setSearchText: (newValue: string) => void;
 };
 
-const Header: React.FC<HeaderProps> = ({
+const Filters: React.FC<HeaderProps> = ({
   sortValue,
   activeFilter,
   searchText,
@@ -20,16 +18,15 @@ const Header: React.FC<HeaderProps> = ({
   setActiveFilter,
   setIsPopupVisible,
 }) => (
-  <header className="header">
-    <h1 className="title">Search</h1>
-    <Search
+  <>
+    <SearchInput
       sortValue={sortValue}
       setIsPopupVisible={setIsPopupVisible}
       searchText={searchText}
       setSearchText={setSearchText}
     />
-    <Filters activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
-  </header>
+    <PositionTabs activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+  </>
 );
 
-export default Header;
+export default Filters;

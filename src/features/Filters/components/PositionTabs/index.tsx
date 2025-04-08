@@ -2,12 +2,12 @@ import { filtersList } from './configs';
 
 import './index.scss';
 
-type FiltersProps = {
+type PositionTabsProps = {
   activeFilter: number;
   setActiveFilter: (filterNumber: number) => void;
 };
 
-const Filters: React.FC<FiltersProps> = ({ activeFilter, setActiveFilter }) => (
+const PositionTabs: React.FC<PositionTabsProps> = ({ activeFilter, setActiveFilter }) => (
   <ul className="filters-list">
     {filtersList.map(({ id, value }) => (
       <li
@@ -21,4 +21,4 @@ const Filters: React.FC<FiltersProps> = ({ activeFilter, setActiveFilter }) => (
   </ul>
 );
 
-export default Filters;
+export default PositionTabs;

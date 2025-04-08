@@ -1,5 +1,5 @@
-import { filtersList } from '../../Filters/configs';
-import type { Employee } from '../../../../../entities/employees/types';
+import { filtersList } from '../../Filters/components/PositionTabs/configs';
+import type { Employee } from '../../../entities/employees/types';
 
 const filterEmployeesByPosition = (
   employeeList: Employee[] | [],

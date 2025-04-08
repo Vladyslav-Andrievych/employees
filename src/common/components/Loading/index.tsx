@@ -1,4 +1,4 @@
-import Skeleton from '../../../../common/components/Skeleton/index.tsx';
+import Skeleton from '../Skeleton';
 
 import './index.scss';
 

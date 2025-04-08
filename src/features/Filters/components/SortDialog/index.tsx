@@ -1,12 +1,12 @@
 import './index.scss';
 
-type SortPopupProps = {
+type SortDialogProps = {
   sortValue: 'alphabet' | 'birthdate';
   setSortValue: (sortStr: 'alphabet' | 'birthdate') => void;
   setIsPopupVisible: (visible: boolean) => void;
 };
 
-const SortPopup: React.FC<SortPopupProps> = ({ sortValue, setSortValue, setIsPopupVisible }) => (
+const SortDialog: React.FC<SortDialogProps> = ({ sortValue, setSortValue, setIsPopupVisible }) => (
   <div className="overlay">
     <div className="modal">
       <button className="modal__close-btn" onClick={() => setIsPopupVisible(false)}>
@@ -43,4 +43,4 @@ const SortPopup: React.FC<SortPopupProps> = ({ sortValue, setSortValue, setIsPop
   </div>
 );
 
-export default SortPopup;
+export default SortDialog;

@@ -1,9 +1,9 @@
 import { useRef } from 'react';
-import Employee from '../Employee';
-import NoDataFound from '../NoDataFound/index.tsx';
+import Employee from './components/Employee/index.tsx';
+import NoDataFound from './components/NoDataFound/index.tsx';
 import { Link } from 'react-router';
 import { filterEmployeeList } from './utils/index.ts';
-import type { Employee as EmployeeType } from '../../../../entities/employees/types/index.ts';
+import type { Employee as EmployeeType } from '../../entities/employees/types/index.ts';
 
 import './index.scss';
 

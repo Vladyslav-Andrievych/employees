@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router';
 import moment from 'moment';
-import type { Employee } from '../../../../entities/employees/types/index.ts';
+import type { Employee } from '../../entities/employees/types';
 
 import './index.scss';
 
@@ -27,7 +27,7 @@ const EmployeePage: React.FC<EmployeePageProps> = ({ employeesData }) => {
     <div className="employee-page">
       <header className="employee-page__header">
         <Link to="/" className="employee-page__back-link">
-          <img src="/back-icon.png" alt="Back icon" />
+          <img src="/images/back-icon.png" alt="Back icon" />
         </Link>
         <div className="employee-page__main-info">
           <img src={avatar} alt="Employee avatar" className="employee-page__avatar" />
@@ -41,7 +41,7 @@ const EmployeePage: React.FC<EmployeePageProps> = ({ employeesData }) => {
       <div className="employee-page__info">
         <div className="employee-page__info-block">
           <img
-            src="/favourite-star-icon.png"
+            src="/images/favourite-star-icon.png"
             alt="Favourite star icon"
             className="employee-page__info-block-img"
           />
@@ -50,7 +50,7 @@ const EmployeePage: React.FC<EmployeePageProps> = ({ employeesData }) => {
         </div>
         <div className="employee-page__info-block">
           <img
-            src="/phone-icon.png"
+            src="/images/phone-icon.png"
             alt="Favourite star icon"
             className="employee-page__info-block-img"
           />

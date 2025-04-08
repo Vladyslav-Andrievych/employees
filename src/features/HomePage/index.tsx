@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import Header from '../../components/Header';
-import EmployeeList from '../../components/EmployeeList';
-import UnexpectedError from '../../../../common/components/UnexpectedError';
-import Loading from '../../components/Loading/index.tsx';
-import SortPopup from '../../components/SortPopup/index.tsx';
-import type { Employee } from '../../../../entities/employees/types/index.ts';
+import Filters from '../Filters';
+import EmployeeList from '../EmployeesList';
+import UnexpectedError from '../../common/components/UnexpectedError';
+import Loading from '../../common/components/Loading';
+import SortDialog from '../Filters/components/SortDialog';
+import type { Employee } from '../../entities/employees/types';
+
+import './index.scss';
 
 type HomePageProps = {
   employeesData: Employee[] | null | -1;
@@ -19,7 +21,7 @@ const HomePage: React.FC<HomePageProps> = ({ employeesData }) => {
   const [searchText, setSearchText] = useState<string>('');
 
   const mainPageContent = [
-    <Header
+    <Filters
       sortValue={sortValue}
       setIsPopupVisible={setIsSortPopupVisible}
       activeFilter={activeFilter}
@@ -31,7 +33,7 @@ const HomePage: React.FC<HomePageProps> = ({ employeesData }) => {
 
   if (isSortPopupVisible) {
     mainPageContent.push(
-      <SortPopup
+      <SortDialog
         sortValue={sortValue}
         setSortValue={setSortValue}
         setIsPopupVisible={setIsSortPopupVisible}
@@ -59,7 +61,10 @@ const HomePage: React.FC<HomePageProps> = ({ employeesData }) => {
 
   return (
     <>
-      {...mainPageContent}
+      <header className="header">
+        <h1 className="title">Search</h1>
+        {...mainPageContent}
+      </header>
       <EmployeeList
         employeesData={employeesData}
         activeFilterNumber={activeFilter}
