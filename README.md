@@ -1,10 +1,10 @@
-# React + TypeScript + Vite
+# Project: Employees directory APP (React + TypeScript + Vite)
 
-<a href='https://guileless-kangaroo-974ef8.netlify.app'>Deploy link on Netlify</a>
+<a href='https://guileless-kangaroo-974ef8.netlify.app'>Site link</a>
 
 <p>Responsive markup</p>
 
-<h6>Tech stack:</h6>
+<h3>The tech stack is:</h3>
 <ul>
   <li>Typescript/JavaScript</li> 
   <li>React</li> 
@@ -19,3 +19,6 @@
   <li>ESLint</li> 
   <li>Prettier</li> 
 </ul>
+
+<h3>Author</h3>
+<p>Vlad Andrievych</p>
