@@ -7,10 +7,25 @@ type SortDialogProps = {
 };
 
 const SortDialog: React.FC<SortDialogProps> = ({ sortValue, setSortValue, setIsPopupVisible }) => (
-  <div className="overlay">
+  <div
+    className="overlay"
+    onClick={(event: React.SyntheticEvent) => {
+      event.stopPropagation();
+
+      const targetClassName = (event.target as Element).className;
+
+      if (
+        targetClassName === 'overlay' ||
+        targetClassName === 'modal__close-btn' ||
+        targetClassName === 'fa-solid fa-xmark'
+      ) {
+        setIsPopupVisible(false);
+      }
+    }}
+  >
     <div className="modal">
-      <button className="modal__close-btn" onClick={() => setIsPopupVisible(false)}>
-        +
+      <button className="modal__close-btn">
+        <i className="fa-solid fa-xmark"></i>
       </button>
       <h4 className="modal__title">Sorting</h4>
       <div className="modal__radio">

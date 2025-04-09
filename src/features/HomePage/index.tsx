@@ -6,8 +6,6 @@ import Loading from '../../common/components/Loading';
 import SortDialog from '../Filters/components/SortDialog';
 import type { Employee } from '../../entities/employees/types';
 
-import './index.scss';
-
 type HomePageProps = {
   employeesData: Employee[] | null | -1;
 };
@@ -20,7 +18,7 @@ const HomePage: React.FC<HomePageProps> = ({ employeesData }) => {
   const [activeFilter, setActiveFilter] = useState<number>(0);
   const [searchText, setSearchText] = useState<string>('');
 
-  const mainPageContent = [
+  const filters = (
     <Filters
       sortValue={sortValue}
       setIsPopupVisible={setIsSortPopupVisible}
@@ -28,23 +26,13 @@ const HomePage: React.FC<HomePageProps> = ({ employeesData }) => {
       setActiveFilter={setActiveFilter}
       searchText={searchText}
       setSearchText={setSearchText}
-    />,
-  ];
-
-  if (isSortPopupVisible) {
-    mainPageContent.push(
-      <SortDialog
-        sortValue={sortValue}
-        setSortValue={setSortValue}
-        setIsPopupVisible={setIsSortPopupVisible}
-      />,
-    );
-  }
+    />
+  );
 
   if (employeesData === null) {
     return (
       <>
-        {...mainPageContent}
+        {filters}
         <Loading />
       </>
     );
@@ -53,7 +41,7 @@ const HomePage: React.FC<HomePageProps> = ({ employeesData }) => {
   if (employeesData === -1) {
     return (
       <>
-        {...mainPageContent}
+        {filters}
         <UnexpectedError />
       </>
     );
@@ -61,16 +49,20 @@ const HomePage: React.FC<HomePageProps> = ({ employeesData }) => {
 
   return (
     <>
-      <header className="header">
-        <h1 className="title">Search</h1>
-        {...mainPageContent}
-      </header>
+      {filters}
       <EmployeeList
         employeesData={employeesData}
         activeFilterNumber={activeFilter}
         searchText={searchText}
         sortValue={sortValue}
       />
+      {isSortPopupVisible && (
+        <SortDialog
+          sortValue={sortValue}
+          setSortValue={setSortValue}
+          setIsPopupVisible={setIsSortPopupVisible}
+        />
+      )}
     </>
   );
 };

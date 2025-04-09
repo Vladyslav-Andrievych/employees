@@ -1,6 +1,8 @@
 import SearchInput from './components/SearchInput';
 import PositionTabs from './components/PositionTabs';
 
+import './index.scss';
+
 type HeaderProps = {
   sortValue: 'alphabet' | 'birthdate';
   setIsPopupVisible: (visible: boolean) => void;
@@ -18,7 +20,8 @@ const Filters: React.FC<HeaderProps> = ({
   setActiveFilter,
   setIsPopupVisible,
 }) => (
-  <>
+  <header className="header">
+    <h1 className="title">Search</h1>
     <SearchInput
       sortValue={sortValue}
       setIsPopupVisible={setIsPopupVisible}
@@ -26,7 +29,7 @@ const Filters: React.FC<HeaderProps> = ({
       setSearchText={setSearchText}
     />
     <PositionTabs activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
-  </>
+  </header>
 );
 
 export default Filters;

@@ -27,7 +27,7 @@ const Employee: React.FC<EmployeeProps> = ({ employeeData, showBirthdateInfo }) 
       </div>
       {showBirthdateInfo && (
         <span className="employee__birthdate">
-          {moment(new Date(birthDateTimeStamp)).format('MMM Do')}
+          {moment(new Date(birthDateTimeStamp)).format('D MMM')}
         </span>
       )}
     </div>
