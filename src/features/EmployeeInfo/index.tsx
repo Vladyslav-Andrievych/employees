@@ -1,14 +1,16 @@
 import { Link, useParams } from 'react-router';
 import moment from 'moment';
-import type { Employee } from '../../entities/employees/types';
+import type { Employee } from '@entities/employee/types';
 
 import './index.scss';
 
-type EmployeePageProps = {
+const MILLISECONDS_IN_A_YEAR = 31540000000;
+
+type EmployeeInfoProps = {
   employeesData: Employee[];
 };
 
-const EmployeePage: React.FC<EmployeePageProps> = ({ employeesData }) => {
+const EmployeeInfo: React.FC<EmployeeInfoProps> = ({ employeesData }) => {
   const { employeeId } = useParams();
 
   const {
@@ -20,8 +22,7 @@ const EmployeePage: React.FC<EmployeePageProps> = ({ employeesData }) => {
     tag,
   } = employeesData.find(({ id }) => id === employeeId) as Employee;
 
-  const birthDate = moment(new Date(birthDateTimeStamp)).format('MMM Do YYYY');
-  const fullYears = Math.trunc((Number(new Date()) - birthDateTimeStamp) / 31540000000);
+  const fullYears = Math.trunc((Number(new Date()) - birthDateTimeStamp) / MILLISECONDS_IN_A_YEAR);
 
   return (
     <div className="employee-page">
@@ -45,7 +46,9 @@ const EmployeePage: React.FC<EmployeePageProps> = ({ employeesData }) => {
             alt="Favourite star icon"
             className="employee-page__info-block-img"
           />
-          <span className="employee-page__info-block-text">{birthDate}</span>
+          <span className="employee-page__info-block-text">
+            {moment(birthDateTimeStamp).format('MMM Do YYYY')}
+          </span>
           <span className="employee-page__info-block-additonal-text">{`${fullYears} years old`}</span>
         </div>
         <div className="employee-page__info-block">
@@ -61,4 +64,4 @@ const EmployeePage: React.FC<EmployeePageProps> = ({ employeesData }) => {
   );
 };
 
-export default EmployeePage;
+export default EmployeeInfo;

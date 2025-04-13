@@ -1,71 +1,72 @@
-import { useRef } from 'react';
-import Employee from './components/Employee/index.tsx';
-import NoDataFound from './components/NoDataFound/index.tsx';
-import { Link } from 'react-router';
-import { filterEmployeeList } from './utils/index.ts';
-import type { Employee as EmployeeType } from '../../entities/employees/types/index.ts';
+import { useMemo } from 'react';
+import { Link, useSearchParams } from 'react-router';
+import Loading from '@common/components/Loading';
+import Error from '@features/Error';
+import { errorConfig } from '@features/Error/configs';
+import EmployeeCard from './components/EmployeeCard';
+import type { Employee } from '@entities/employee/types';
 
 import './index.scss';
 
 type EmployeeListProps = {
-  employeesData: EmployeeType[];
-  activeFilterNumber: number;
-  searchText: string;
-  sortValue: 'alphabet' | 'birthdate';
+  employeesData: Employee[] | null | [];
 };
 
-const EmployeeList: React.FC<EmployeeListProps> = ({
-  employeesData,
-  activeFilterNumber,
-  searchText,
-  sortValue,
-}) => {
-  //TO THINK: Don't use refs for hold this kind of information, consider another implementation
-  //for exapmle, transform list of employeeData into Object like ({ [birthYear]: [employee1, employee2, ...], ...})
-  //and use different render logic (or addapt already existing one) for different value of sortValue variable ('alphabet' | 'birthdate')
-  const currentYear = useRef<null | number>(null);
+const EmployeesList: React.FC<EmployeeListProps> = ({ employeesData }) => {
+  const [searchParams] = useSearchParams();
 
-  const filteredEmployeeList = filterEmployeeList(employeesData, activeFilterNumber, searchText);
-  const sortedEmployeeList = [...filteredEmployeeList]
-    .sort((a, b) =>
-      sortValue === 'alphabet' ? a.name.localeCompare(b.name) : a.birthDate - b.birthDate,
-    )
-    .map(employee => ({
-      ...employee,
-      birthYear: new Date(employee.birthDate).getFullYear(),
-    }));
+  const filteredEmployees: Employee[] | [] = useMemo(() => {
+    if (!employeesData || employeesData.length === 0) return [];
 
-  if (filteredEmployeeList.length === 0) {
-    return <NoDataFound />;
+    const {
+      position: positionQuery,
+      filter: filterText,
+      sortBy,
+    } = Object.fromEntries(searchParams);
+
+    const filteredData = employeesData.filter(
+      ({ position, name, tag, email }) =>
+        (!positionQuery || position.toLowerCase() === positionQuery.toLowerCase()) &&
+        (!filterText ||
+          [name, tag, email].some(field =>
+            field?.toLowerCase().includes(filterText.toLowerCase()),
+          )),
+    );
+
+    return filteredData.sort((a, b) =>
+      sortBy ? a.birthDate - b.birthDate : a.name.localeCompare(b.name),
+    );
+  }, [searchParams, employeesData]);
+
+  if (employeesData === null) {
+    return <Loading />;
+  }
+
+  if (employeesData.length === 0) {
+    return <Error {...errorConfig.unexpectedError} />;
+  }
+
+  if (filteredEmployees.length === 0) {
+    return <Error {...errorConfig.noDataFound} />;
   }
 
   return (
-    <div className="employee-list">
-      {sortedEmployeeList.map(employee => {
-        let showYearSectionHeader = false;
-
-        if (sortValue === 'birthdate' && currentYear.current !== employee.birthYear) {
-          showYearSectionHeader = true;
-          currentYear.current = employee.birthYear;
-        }
-
-        return (
+    <>
+      <div className="employee-list">
+        {filteredEmployees.map((employee, index) => (
           <div className="employee-list__item-container" key={employee.id}>
-            {showYearSectionHeader && (
-              <div className="emoloyee-list-item-divider">
-                <hr />
-                <span>{employee.birthYear}</span>
-                <hr />
-              </div>
-            )}
             <Link to={`/employees/${employee.id}`} className="employee-list__item-link">
-              <Employee employeeData={employee} showBirthdateInfo={sortValue === 'birthdate'} />
+              <EmployeeCard
+                sortedEmployeeList={filteredEmployees}
+                employeeData={employee}
+                currentItemIndex={index}
+              />
             </Link>
           </div>
-        );
-      })}
-    </div>
+        ))}
+      </div>
+    </>
   );
 };
 
-export default EmployeeList;
+export default EmployeesList;

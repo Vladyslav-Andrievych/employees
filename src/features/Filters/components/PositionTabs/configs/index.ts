@@ -1,34 +1,33 @@
-import type { FiltersList } from '../../../../../entities/employees/types';
+import type { Position } from '@entities/employee/types';
 
-export const filtersList: FiltersList = [
+export type PositionTabsConfig = {
+  name: 'All' | 'Designers' | 'Analysts' | 'Managers' | 'iOS' | 'Android';
+  value: 'all' | Position;
+};
+
+export const positionTabs: PositionTabsConfig[] = [
   {
-    id: 0,
-    value: 'All',
-    name: 'all',
+    name: 'All',
+    value: 'all',
   },
   {
-    id: 1,
-    value: 'Designers',
-    name: 'designer',
+    name: 'Designers',
+    value: 'designer',
   },
   {
-    id: 2,
-    value: 'Analysts',
-    name: 'analyst',
+    name: 'Analysts',
+    value: 'analyst',
   },
   {
-    id: 3,
-    value: 'Managers',
-    name: 'manager',
+    name: 'Managers',
+    value: 'manager',
   },
   {
-    id: 4,
-    value: 'iOS',
-    name: 'ios',
+    name: 'iOS',
+    value: 'ios',
   },
   {
-    id: 5,
-    value: 'Android',
-    name: 'android',
+    name: 'Android',
+    value: 'android',
   },
 ];

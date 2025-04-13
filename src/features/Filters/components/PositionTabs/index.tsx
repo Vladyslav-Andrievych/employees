@@ -1,24 +1,50 @@
-import { filtersList } from './configs';
+import { useSearchParams } from 'react-router';
+import { getPrevSearchParams } from '@utils/index.ts';
+import { positionTabs } from './configs';
+import type { Position } from '@entities/employee/types';
 
 import './index.scss';
 
-type PositionTabsProps = {
-  activeFilter: number;
-  setActiveFilter: (filterNumber: number) => void;
-};
+const PositionTabs: React.FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
 
-const PositionTabs: React.FC<PositionTabsProps> = ({ activeFilter, setActiveFilter }) => (
-  <ul className="filters-list">
-    {filtersList.map(({ id, value }) => (
-      <li
-        key={id}
-        className={`filters-list__item ${activeFilter === id && 'filters-list__item_active'}`}
-        onClick={() => setActiveFilter(id)}
-      >
-        {value}
-      </li>
-    ))}
-  </ul>
-);
+  function handleFilterItemClick(positionValue: 'all' | Position) {
+    if (positionValue === 'all') {
+      searchParams.delete('position');
+      setSearchParams(searchParams);
+    } else {
+      const prevSearchParams = getPrevSearchParams(searchParams);
+      setSearchParams({
+        ...prevSearchParams,
+        position: positionValue as string,
+      });
+    }
+  }
+
+  return (
+    <ul className="filters-list">
+      {positionTabs.map(({ value, name }, index) => {
+        const itemClassNames = ['filters-list__item'];
+
+        if (
+          searchParams.get('position') === value ||
+          (!searchParams.get('position') && value === 'all')
+        ) {
+          itemClassNames.push('filters-list__item_active');
+        }
+
+        return (
+          <li
+            key={index}
+            className={itemClassNames.join(' ')}
+            onClick={() => handleFilterItemClick(value)}
+          >
+            {name}
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
 
 export default PositionTabs;

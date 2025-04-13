@@ -1,14 +1,18 @@
-import { BrowserRouter, Routes, Route } from 'react-router';
 import { useState, useEffect } from 'react';
-import HomePage from './features/HomePage';
-import EmployeeInfo from './features/EmployeeInfo';
-import { getEmployees } from './entities/employees/gateways';
-import type { Employee } from './entities/employees/types';
+import { BrowserRouter, Routes, Route } from 'react-router';
+import EmployeesList from '@features/EmployeesList';
+import EmployeeInfo from '@features/EmployeeInfo';
+import SearchInput from '@features/Filters/components/SearchInput';
+import PositionTabs from '@features/Filters/components/PositionTabs';
+import SortDialog from '@features/Filters/components/SortDialog';
+import { getEmployees } from '@entities/employee/gateways';
+import type { Employee } from '@entities/employee/types';
 
-import './common/styles/common.scss';
+import '@common/styles/common.scss';
 
 function App() {
-  const [employeesData, setEmployeesData] = useState<Employee[] | null | -1>(null);
+  const [employeesData, setEmployeesData] = useState<Employee[] | null | []>(null);
+  const [isSortDialogVisible, setIsSortDialogVisible] = useState<boolean>(false);
 
   useEffect(() => {
     //eslint-disable-next-line @typescript-eslint/no-floating-promises
@@ -19,14 +23,27 @@ function App() {
     <BrowserRouter>
       <div className="page">
         <Routes>
-          <Route path="/" element={<HomePage employeesData={employeesData} />} />
-          {employeesData && employeesData !== -1 && (
+          <Route
+            path="/"
+            element={
+              <>
+                <header className="header">
+                  <h1 className="title">Search</h1>
+                  <SearchInput showSortDialog={() => setIsSortDialogVisible(true)} />
+                  <PositionTabs />
+                </header>
+                <EmployeesList employeesData={employeesData} />
+              </>
+            }
+          />
+          {employeesData && employeesData.length !== 0 && (
             <Route
               path="/employees/:employeeId"
               element={<EmployeeInfo employeesData={employeesData} />}
             />
           )}
         </Routes>
+        {isSortDialogVisible && <SortDialog hideSortDialog={() => setIsSortDialogVisible(false)} />}
       </div>
     </BrowserRouter>
   );

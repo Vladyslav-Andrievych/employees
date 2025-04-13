@@ -1,8 +1,8 @@
-import type { Employee } from '../types';
+import type { Employee } from '@entities/employee/types';
 
 const baseUrl = 'https://66a0f8b17053166bcabd894e.mockapi.io/api/workers';
 
-export const getEmployees = async (): Promise<Employee[] | -1> => {
+export const getEmployees = async (): Promise<Employee[] | []> => {
   try {
     const response = await fetch(baseUrl);
 
@@ -13,6 +13,6 @@ export const getEmployees = async (): Promise<Employee[] | -1> => {
     throw new Error('Error occurred when fetching employees info');
   } catch (error) {
     console.error(error);
-    return -1;
+    return [];
   }
 };
