@@ -1,18 +1,15 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router';
+import Filters from '@features/Filters';
 import EmployeesList from '@features/EmployeesList';
 import EmployeeInfo from '@features/EmployeeInfo';
-import SearchInput from '@features/Filters/components/SearchInput';
-import PositionTabs from '@features/Filters/components/PositionTabs';
-import SortDialog from '@features/Filters/components/SortDialog';
 import { getEmployees } from '@entities/employee/gateways';
 import type { Employee } from '@entities/employee/types';
 
 import '@common/styles/common.scss';
 
-function App() {
+const App: React.FC = () => {
   const [employeesData, setEmployeesData] = useState<Employee[] | null | []>(null);
-  const [isSortDialogVisible, setIsSortDialogVisible] = useState<boolean>(false);
 
   useEffect(() => {
     //eslint-disable-next-line @typescript-eslint/no-floating-promises
@@ -27,11 +24,7 @@ function App() {
             path="/"
             element={
               <>
-                <header className="header">
-                  <h1 className="title">Search</h1>
-                  <SearchInput showSortDialog={() => setIsSortDialogVisible(true)} />
-                  <PositionTabs />
-                </header>
+                <Filters />
                 <EmployeesList employeesData={employeesData} />
               </>
             }
@@ -43,10 +36,9 @@ function App() {
             />
           )}
         </Routes>
-        {isSortDialogVisible && <SortDialog hideSortDialog={() => setIsSortDialogVisible(false)} />}
       </div>
     </BrowserRouter>
   );
-}
+};
 
 export default App;
