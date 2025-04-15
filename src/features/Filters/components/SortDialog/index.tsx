@@ -1,5 +1,4 @@
 import { useSearchParams } from 'react-router';
-import { getPrevSearchParams } from '@utils/index.ts';
 
 import './index.scss';
 
@@ -10,20 +9,19 @@ type SortDialogProps = {
 const SortDialog: React.FC<SortDialogProps> = ({ hideSortDialog }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  function handleDialogClose(event: React.SyntheticEvent) {
-    event.stopPropagation();
-
-    const targetClassName = (event.target as Element).className;
-
-    if (['overlay', 'modal__close-btn', 'fa-solid fa-xmark'].includes(targetClassName)) {
-      hideSortDialog();
-    }
-  }
+  const handleSortChange = (newSortValue: 'alphabet' | 'birthdate') => {
+    setSearchParams(prevParams => {
+      const params = new URLSearchParams(prevParams);
+      //eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      newSortValue === 'alphabet' ? params.delete('sortBy') : params.set('sortBy', newSortValue);
+      return params;
+    });
+  };
 
   return (
-    <div className="overlay" onClick={handleDialogClose}>
-      <div className="modal">
-        <button className="modal__close-btn">
+    <div className="overlay" onClick={hideSortDialog}>
+      <div className="modal" onClick={(event: React.SyntheticEvent) => event.stopPropagation()}>
+        <button className="modal__close-btn" onClick={hideSortDialog}>
           <i className="fa-solid fa-xmark"></i>
         </button>
         <h4 className="modal__title">Sorting</h4>
@@ -36,10 +34,7 @@ const SortDialog: React.FC<SortDialogProps> = ({ hideSortDialog }) => {
               value="alphabet"
               className="modal__radio-input"
               checked={!searchParams.get('sortBy')}
-              onChange={() => {
-                searchParams.delete('sortBy');
-                setSearchParams(searchParams);
-              }}
+              onChange={() => handleSortChange('alphabet')}
             />
             By alphabet
           </label>
@@ -51,13 +46,7 @@ const SortDialog: React.FC<SortDialogProps> = ({ hideSortDialog }) => {
               value="birthdate"
               className="modal__radio-input"
               checked={!!searchParams.get('sortBy')}
-              onChange={() => {
-                const prevSearchParams = getPrevSearchParams(searchParams);
-                setSearchParams({
-                  ...prevSearchParams,
-                  sortBy: 'birthdate',
-                });
-              }}
+              onChange={() => handleSortChange('birthdate')}
             />
             By birthdate
           </label>

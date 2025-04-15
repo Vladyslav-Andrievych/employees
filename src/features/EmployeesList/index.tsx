@@ -43,11 +43,11 @@ const EmployeesList: React.FC<EmployeeListProps> = ({ employeesData }) => {
   }
 
   if (employeesData.length === 0) {
-    return <Error {...errorConfig.unexpectedError} />;
+    return <Error config={errorConfig.unexpectedError} />;
   }
 
   if (filteredEmployees.length === 0) {
-    return <Error {...errorConfig.noDataFound} />;
+    return <Error config={errorConfig.noDataFound} />;
   }
 
   return (

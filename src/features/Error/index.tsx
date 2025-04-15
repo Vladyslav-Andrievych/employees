@@ -1,19 +1,12 @@
+import { ErrorConfig } from './configs';
+
 import './index.scss';
 
 type ErrorProps = {
-  image: {
-    src: string;
-    altText: string;
-  };
-  info: string;
-  additionalText: string;
-  action?: {
-    func: () => void;
-    btnText: string;
-  };
+  config: ErrorConfig;
 };
 
-const Error: React.FC<ErrorProps> = ({ image, info, additionalText, action }) => (
+const Error: React.FC<ErrorProps> = ({ config: { image, info, additionalText, action } }) => (
   <div className="error">
     <img src={image.src} alt={image.altText} className="error__img" />
     <p className="error__info">{info}</p>

@@ -1,5 +1,4 @@
 import { useSearchParams } from 'react-router';
-import { getPrevSearchParams } from '@utils/index.ts';
 
 import './index.scss';
 
@@ -10,18 +9,16 @@ type SearchInputProps = {
 const SearchInput: React.FC<SearchInputProps> = ({ showSortDialog }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  function handleSearchInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-    if (event.target.value === '') {
-      searchParams.delete('filter');
-      setSearchParams(searchParams);
-    } else {
-      const prevSearchParams = getPrevSearchParams(searchParams);
-      setSearchParams({
-        ...prevSearchParams,
-        filter: event.target.value,
-      });
-    }
-  }
+  const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchParams(prevParams => {
+      const params = new URLSearchParams(prevParams);
+      //eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      event.target.value === ''
+        ? params.delete('filter')
+        : params.set('filter', event.target.value);
+      return params;
+    });
+  };
 
   return (
     <div className="search-field">

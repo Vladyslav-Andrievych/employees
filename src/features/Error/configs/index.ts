@@ -1,4 +1,17 @@
-export const errorConfig = {
+export type ErrorConfig = {
+  image: {
+    src: string;
+    altText: string;
+  };
+  info: string;
+  additionalText: string;
+  action?: {
+    func: () => void;
+    btnText: string;
+  };
+};
+
+export const errorConfig: Record<string, ErrorConfig> = {
   unexpectedError: {
     image: {
       src: '/images/flying-saucer.png',

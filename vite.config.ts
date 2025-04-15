@@ -10,7 +10,6 @@ export default defineConfig({
       "@common": path.resolve(__dirname, 'src/common'),
       "@entities": path.resolve(__dirname, 'src/entities'),
       "@features": path.resolve(__dirname, 'src/features'),
-      "@utils": path.resolve(__dirname, 'src/utils'),
     }
   }
 });

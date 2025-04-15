@@ -1,24 +1,23 @@
 # Project: Employees directory APP (React + TypeScript + Vite)
 
-<a href='https://guileless-kangaroo-974ef8.netlify.app'>Site link</a>
+### [Site link](https://guileless-kangaroo-974ef8.netlify.app)
 
-<p>Responsive markup</p>
+Responsive markup
 
-<h3>The tech stack is:</h3>
-<ul>
-  <li>Typescript/JavaScript</li> 
-  <li>React</li> 
-  <li>Vite</li>
-  <li>React-router</li>
-  <li>moment</li>
-  <li>MUI</li> 
-  <li>HTML5</li>
-  <li>CSS3</li> 
-  <li>Sass</li> 
-  <li>BEM</li> 
-  <li>ESLint</li> 
-  <li>Prettier</li> 
-</ul>
+### The tech stack is:
 
-<h3>Author</h3>
-<p>Vlad Andrievych</p>
+- [Typescript](https://www.typescriptlang.org/) 
+- [React](https://react.dev/) 
+- [Vite](https://vite.dev/)
+- [React-router](https://reactrouter.com/)
+- [moment](https://momentjs.com/)
+- [MUI](https://mui.com/) 
+- [HTML5](https://en.wikipedia.org/wiki/HTML5)
+- [Sass](https://sass-lang.com/) 
+- [BEM methodology](https://en.bem.info/methodology/) 
+- [ESLint](https://eslint.org/) 
+- [Prettier](https://prettier.io/) 
+
+
+### Author
+- Vlad Andrievych
